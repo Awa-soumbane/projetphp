@@ -1,0 +1,40 @@
+
+   table {
+  
+    color: #404040;
+    display: flex;
+    justify-content: center;
+  bottom: -82px;
+  
+}
+th{
+    font-size:  30px;
+    border-bottom: 3px solid #ffcb61;
+    padding: 5px 20px;
+    font-weight: 500;
+    border: 2px solid;
+  
+}
+td{
+    font-weight: 400;
+    padding: 5px 30px;
+    font-size: 20px;
+    border: 2px solid;
+  
+}
+img
+{
+    height: 25px;
+
+}tr:nth-child(2n){
+background-color: #f6f8f8;
+
+}tr:nth-child(2n){
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0; 
+    
+    }
+    .font{
+        background-color: blue;
+        height: 230px;
+    }
