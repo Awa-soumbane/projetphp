@@ -17,24 +17,37 @@ require_once '../dbase/dbase.php'
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-       <div class="font">
+      <!--  <div class="font">
        <h3>ESPACE ADMIN</h3>
         <img src="image/photo.jpg" alt="">
         <p>AWA Soumbane
           SN-1234
-        </p>
+        </p> -->
      <!--    
       <div class="dec">
         <span>Deconnexion</span>
     </div>  -->
-      <a href=""><i class="fa-regular fa-inbox-out" id="icon" ></i></a>
+   <!--    <a href=""><i class="fa-regular fa-inbox-out" id="icon" ></i></a>
        </div>
        <div class="menu">
        
         <button id="bout">Utilisateur</button>
-       <button id="bot"> Liste Déarchivage </button>
+       <button id="bot"> Liste Déarchivage </button> -->
        
-       </div>
+      <!--  </div -->
+      <header class="pages">
+<span><a href=""><i class="fa-solid fa-right-to-bracket"id="iconn" >deconnecter</i></a></span>
+<h3 style="color:white ;">ESPACE ADMIN</h3>
+       <img src="image/photo.jpg" alt="">
+       <p>AWA Soumbane <br> SN-1234 </p>
+       <div class="menu">
+       
+       <!--  <button id="bout"><a href="../utilisateur/utilisateur.php"> Utilisateur </a></button> -->
+       <button id="bot"> <a href="admin.php">Liste Dearchivages</a> </button>
+       
+       </div> 
+        
+</header>
        <form>
         
        <div class="recher">
@@ -74,7 +87,7 @@ require_once '../dbase/dbase.php'
                     if($etat==1){
                     echo "<tr><td>$prenom</td><td>$nom</td><td>$email</td><td>$roles</td><td>$matricules</td>";
                  
-                    echo "<td><a href='admin.php?dearchive=$id'><i class='fa-solid fa-pen-to-square'></i><i class='fa-solid fa-folder-xmark'></i></a>";
+                    echo "<td><a href='dearchi.php?dearchive=$id'><i class='fa-solid fa-calendar-xmark'></i><i class='fa-solid fa-folder-xmark'></i></a>";
                     
                     echo "</td";
                     echo "</tr>";
@@ -85,8 +98,6 @@ if (isset($_GET['dearchive'])) {
   $id=$_GET['dearchive'];
 /*  $elev= SELECT * FORM User */
   $req=$conn->query("UPDATE User SET etat='0' WHERE id='$id'");
-
-      header('location:dearch.php');
    
    
 }
@@ -99,7 +110,8 @@ if (isset($_GET['dearchive'])) {
     </body>
     <style>
 
-   table {
+ 
+table {
   
   color: #404040;
   display: block;
@@ -111,24 +123,29 @@ th{
   padding: 5px 20px;
   font-weight: 500;
   border: 2px solid;
-  padding: 5px 60px;
-  margin: 5px 90px;
+ /*  padding: 5px 60px;
+  margin: 5px 90px; */
 
 }
 td{
   
-  font-weight: 400;
-  padding: 5px 30px;
+ /*  font-weight: 400; */
+  padding: 5px 20px;
   font-size: 20px;
   border: 2px solid;
-  height: 70px;
+  height: 40px;
 
 }
-img
+  img
 {
-  height: 25px;
+  height: 70px;
+  width: 200px;
+    margin-top: -95px;
+    border-radius: 60%; 
+    
 
-}tr:nth-child(2n){
+} 
+tr:nth-child(2n){
 background-color: #f6f8f8;
 
 }tr:nth-child(2n){
@@ -136,12 +153,12 @@ background-color: #f6f8f8;
   border-top: 1px solid #e0e0e0; 
   
   }
-  .font{
+ /*  .font{
       background-color: blue;
       height: 130px;
     
   }
-  .contrainer{
+  . */.contrainer{
     width: 100%;
     display: flex;
   justify-content: center;
@@ -161,9 +178,7 @@ background-color: #f6f8f8;
     border: 2px solid;
     
   }
-  form{
-  ;
-  }
+  
   #rech{
     width: 20%;
     height: 40px;
@@ -172,52 +187,70 @@ background-color: #f6f8f8;
    
     padding-left: 5px;
   }
-  h3{
+  #iconn{
     display: flex;
   justify-content: center;
-  font-size: 20px;
+  margin-left: 80%;
+  margin-top: 12px;
+  width: 80px;
+  color: black;
+  }.pages{
+    width: 100%;
+    height: 200px;
+    border: 2px solid;
+    background-color:  blue;
+  }
+   h3{
+    display: flex;
+  justify-content: center;
+  font-size: 25px;
+  color:  write;
  /*  margin-bottom: -120px; */
 
-  }
-  
-  .dec{
-    margin-bottom: 70px;
-    color: #ffff;
-  } .font img{
-    width: 10%;
-    height: 90px;
-    border-radius: 100px;
-    
-  } 
-  img{
-    margin-top: -40px;
-    padding-left: 10px;
+  } p{
+    margin-top: -10px;
+    font-size: 20px;
   }
   .menu{
   
-    width: 100%;
-    height: 40px;
-    display: flex;
-  justify-content: center;
-  padding-left: 260px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+justify-content: center;
+padding-left: 500px;
+margin-top: -20px;;
+}#bout{
+  width: 15%;
+  height: 40px;
  
-  }#bout{
-    width: 30%;
-    height: 40px;
-   
-    font-size: 20px;
-  
-  }
-  #bot{
-    width: 30%;
-    height: 40px;
- 
-    font-size: 20px;
-  }
-  span{
-   
-  }
+  font-size: 20px;
 
-    </style>
+}
+#bot{
+  width: 15%;
+  height: 40px;
+
+  font-size: 20px;
+} 
+/* span{
+  width: 40%;
+  height: 40px;
+} */
+a{
+  color: black;
+  display: flex;
+justify-content: center;
+}
+
+ </style>
+ <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
  </body>
 </html>

@@ -15,14 +15,14 @@ if(isset($_GET['modif'])){
 if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
 
 
-	$nom=$_POST['prenom'];	
-    $prenom=$_POST['nom'];
+	$nom=$_POST['nom'];	
+    $prenom=$_POST['prenom'];
     $email=$_POST['email'];			
   
     $ID=$_GET['modif'];	
     $datemodif=date('y-m-d h:i:s');
  
-    $stmtAjoutPersonne=$conn->prepare("UPDATE User SET prenom='$prenom',nom='$nom',email='$email', date_modif='$datemodif' WHERE id=$ID");
+    $stmtAjoutPersonne=$conn->prepare("UPDATE User SET nom='$nom',prenom='$prenom',email='$email', date_modif='$datemodif' WHERE id=$ID");
     $stmtAjoutPersonne->execute();
     if($stmtAjoutPersonne){
         header('location:../admin/admin.php? reponse=modification réussie');
@@ -31,37 +31,6 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
 }
 
 }
-/* if(isset($_GET['updateid'])){
-  // var_dump($_GET['updateid']);
-  //  exit;   
-    $ID =$_GET['updateid'];
-    $stmt=$bdd->prepare("SELECT * FROM utilisateurs where id=$ID");
-
-    $stmt->execute();
-    if ($stmt->rowCount() > 0) {
-        $check=$stmt->fetchAll()[0];
-    }
-     
-if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
-
-
-	$nom=$_POST['nom'];	
-    $prenom=$_POST['prenom'];
-    $email=$_POST['email'];			
-  
-    $ID=$_GET['updateid'];	
-    $datemodif=date('y-m-d h:i:s');
- 
-    $stmtAjoutPersonne=$bdd->prepare("UPDATE utilisateurs SET nom='$nom',prenom='$prenom',email='$email', date_modif='$datemodif' WHERE id=$ID");
-    $stmtAjoutPersonne->execute();
-    if($stmtAjoutPersonne){
-        header('location:../pages/pageadmin.php? modif=modification réussie');
-    }else { die('Erreur : '.$e->getMessage());}
-   
-}
-
-} */
-
 
 ?>
 

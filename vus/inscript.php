@@ -16,7 +16,7 @@
 </div>
   <div class="container w-50 p-3 col-md-5 mb-8">
   <h1>FORMULAIRE D'INSCRIPTION</h1>
-    <form id="form" action="../traitement/traitement.php" method="POST" class="row g-3 d-flex justify-content-center no-wrap m-2 bg-light" >
+    <form id="form" action="../traitement/traitement.php" method="POST" class="row g-3 d-flex justify-content-center no-wrap m-2 bg-light" enctype="multipart/form-data">
        
         <div class="col-md-6">
         <div class="input-control">
@@ -36,6 +36,7 @@
         <div class="input-control">
             <label for="email">Email</label>
             <input id="email" name="email" class=" p-3 rounded-0" type="email">
+            <p><?=$_GET["messages"]?? null?></p>
             <p class="error"></p>
             </div>
         </div>
@@ -75,7 +76,8 @@
                   accept="image/png, image/jpeg">
 
                  </div>
-                  <button type="submit" name="submit" id="button">Connexion</button>
+                  <button type="submit" name="submit" id="button">S'INSCRIRE</button>
+                    <a href="../CONNEXION/connection.php" id="conn">CONNEXION</a>
         
     </form>
 </div>
@@ -113,6 +115,8 @@
     width: 300px;
     background-color: blue;
     border-radius: 10px;
+  /*   display: flex;
+  justify-content: center;  */
    
 }
 
@@ -154,7 +158,16 @@ label{
     font-size: 100%;
     margin-right: 102px;
 }
-
+a{
+text-decoration: none;
+color: ;
+font-size: 20px;
+margin-right: -1163px;
+}
+#conn{
+  font-size: 15px;
+  margin-left: -150px;
+}
 
 </style>
 </html>
