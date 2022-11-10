@@ -39,11 +39,11 @@ $user = $sql->fetch();
        <?php echo $_SESSION['nom'] ?></p>
        <p><?php echo $_SESSION['matricule'] ?></p>
   </div>
-  <div><h3 class="text-center">ESPACE ADMIN</h3></div>
+  <div><h3 class="text-center">UTILISATEUR</h3></div>
        <div class="end my-5">
        
         <!-- <button id="bout"><a href="../utilisateur/utilisateur.php">Utilisateur</a></button> -->
-       <button type="button" class="btn btn-light m-3"><a href="dearchi1.php">Liste Archivage </a></button>
+      
        <button type="button" class="btn btn-light">
        <a href="../vus/deconnection.php"><i class="fa-solid fa-right-to-bracket" ></i></a>
        </button> 
@@ -76,7 +76,7 @@ $user = $sql->fetch();
                 <th>Email</th>
                 <th>Role</th>
                    <th>Matricule</th>
-                      <th>Action</th>
+                      <th>Date_ins</th>
             </tr>
             </thead>
             <tbody>
@@ -94,7 +94,7 @@ $list->execute();
 $result = $list->fetch();
 $nbUser = (int) $result['nb_user'];
 
-$parPage =11;
+$parPage =6;
 $pages = ceil($nbUser / $parPage);
 
 $premier = ($currentPage * $parPage) - $parPage;
@@ -112,42 +112,45 @@ $list->execute();
 $list=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DESC');
   } 
 /*   <i class="fa-solid fa-user"></i> */
-                while($data = $list->fetch(PDO::FETCH_ASSOC)){
-                    $id = $data["id"];
-                    $nom = $data["nom"];
-                    $prenom = $data["prenom"];
-                    $email = $data["email"];
-                    $roles = $data["roles"];
-                    $matricules = $data["matricule"];
-                    $etat = $data["etat"];
+while($data = $list->fetch(PDO::FETCH_ASSOC)){
+    $id = $data["id"];
+    $nom = $data["nom"];
+    $prenom = $data["prenom"];
+    $email = $data["email"];
+    $roles = $data["roles"];
+    $matricules = $data["matricule"];
+    $date = $data["date_ins"];
+    $etat = $data["etat"];
+   /*  if($etat==0){ */
+    $matSession = $_SESSION['matricule'];
+    /*   /supprimer le nom de l'utilisateur qui se connect/ */
+      if($etat==0 && $matricules!=$matSession){
+    echo "<tr>
+    <td>$nom</td>
+    <td>$prenom</td>
+    <td>$email</td>
+    <td>$roles</td>
+    <td>$matricules</td>
+    <td>$date</td>";
+    }
+   } 
+//code pour archiver en changeant la valeur 0 par 1 avec 1=archiver et 0=dearchiver
+if (isset($_GET['archive'])) {
+$id=$_GET['archive'];
+/*  $elev= SELECT * FORM User */
+$req=$conn->query("UPDATE User SET etat='1' WHERE id='$id'");
 
-                    $matSession = $_SESSION['matricule'];
-                  /*   /supprimer le nom de l'utilisateur qui se connect/ */
-                    if($etat==0 && $matricules!=$matSession){
-                    echo '<tr>
-                    <td>'.$nom.'</td>
-                    <td>'.$prenom.'</td>
-                    <td>'.$email.'</td>
-                    <td>'.$roles.'</td>
-                    <td>'.$matricules.'</td>
-                    <td style="display:flex; gap: 20px; justify-content:center;"">
-                    <button><a title="changer le role" href="../vus/swite.php?switeid='.$id.'"><i class="fa-solid fa-repeat"></i></a></button>
-                    <button><a title="modifier"href="../vus/modification.php?modif='.$id.'"><i class="fa-solid fa-pen-to-square"></i></a></button>
-                    <button><a title="archiver"href="../admin/admin.php?archive='.$id.'" onclick="return confirm(\'Voulez vous vraimenr archiver ?\')"><i class="fa-solid fa-box-archive"></i></a></button>
-                    
-                    </td>
-                    </tr>';
-                    }
-                }
+header('location:admin.php');
+
+
+}
                 //code pour archiver en changeant la valeur 0 par 1 avec 1=archiver et 0=dearchiver
          if (isset($_GET['archive'])) {
               $id=$_GET['archive'];
              /*  $elev= SELECT * FORM User */
   $req=$conn->query("UPDATE User SET etat='1' WHERE id='$id'");
-
-
 }
-
+$date_ins = date('y-m-d');
 
 
                 ?>
@@ -215,28 +218,8 @@ $list=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DES
     font-size: 20px;
   
   }
- 
- 
   </style>
     
     </body>
    </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

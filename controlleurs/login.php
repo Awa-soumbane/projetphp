@@ -18,50 +18,45 @@ if (isset( $_POST["email"]) && isset($_POST["password"])){
     $user = $res->fetch();
     /* var_dump($res->rowCount());
         exit; */
-    if ($res->rowCount() > 0){
+    if (count($user) > 0){
         //récupération des donnés sous forme de tableau
 
         //données récupéré de la base
         $password = $user['mdp'];
 
         //vérification mot de passe
-         if ($pass == $password){
+         if (password_verify($pass, $password)){
+            echo password_verify($pass, $password);
             $_SESSION["email"] = $user["email"];
             $_SESSION["roles"] = $user["roles"];
             $_SESSION["photo"] = $user["photo"];
+            $_SESSION["nom"] =    $user["nom"];
+            $_SESSION["prenom"] = $user["prenom"];
+            $_SESSION["matricule"] = $user["matricule"];
 
-        if($user["roles"] === "Administrateur"){ 
+        if($user["roles"] === "Administrateur" && $user ['etat']==0){ 
             header("Location: ../admin/admin.php");
-        }else{
-            header("Location:../utilisateur/utilisateur.php");
+
+        }elseif($user["roles"] === "Utilisateur" && $user ['etat']==0){
+            header("Location:../utilisateur/utilisateur1.php");
+        } 
+        elseif($user['etat']==1)
+        {
+            $erreur["invalidMdp"] = " Vous etes deja archiver";
+            header('location: ../CONNEXION/connection.php?erreur_mdp='.$erreur["invalidMdp"].'');
+            exit; 
         }
 
-            //mot de passe incorrect
-            /* $erreur["invalidMdp"] = "vous n'etes pas dans la base de donnée";
-            header('location: ../CONNEXION/connection.php?erreur_mdp='.$erreur["invalidMdp"].'');
-            exit; */
+    
         } else{
             $erreur["invalidMdp"] = "vous n'etes pas dans la base de donnée";
             header('location: ../CONNEXION/connection.php?erreur_mdp='.$erreur["invalidMdp"].'');
             exit; 
         }
-        /* if($pass === $password && $user["roles"] === "Administrateur"){ 
-    
-        $_SESSION["email"] = $user["email"];
-        $_SESSION["roles"] = $user["roles"];
-        $_SESSION["photo"] = $user["photo"]; */
-        //vérification du statut de l'utilisateur
-
-        
-       /*      header("Location: ../admin/admin.php");
-        }else if($pass === $password && $user["roles"] === "Utilisateur"){
-            $_SESSION["email"] = $user["email"];
-            $_SESSION["roles"] = $user["roles"];
-            $_SESSION["photo"] = $user["photo"];
-            header("Location:../utilisateur/utilisateur.php");
+      
             
-        }*/
+        }
     }
 }
-}
+
  

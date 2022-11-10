@@ -110,7 +110,7 @@ function validateForm() {
     }else if(isEmailValid(emailInput.value)){
         setSuccess(emailInput);
     }else{
-        setError(emailInput, 'Provide valid email address');
+        setError(emailInput, 'Email invalide');
     }
 
     //PASSWORD

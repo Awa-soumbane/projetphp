@@ -1,14 +1,15 @@
 <?php
-include('../dbase/dbase.php');
-include("../admin/admin.php");
-//code pour archiver en changeant la valeur 0 par 1
-if (isset($_GET['archive'])) {
-    $id=$_GET['archive'];
-/*  $elev= SELECT * FORM User */
-    $req=$conn->query("UPDATE User SET etat='1' WHERE id='$id'");
+/* include '../dbase/dbase.php';
 
-        /* header('location:../admin/admin.php'); */
-     
-     
+        if (isset($_GET['archive'])) {
+            $id=$_GET['archive']; */
+           /*  $elev= SELECT * FORM User */
+/*            $date_arc = date('y-m-d');
+$req=$conn->prepare("UPDATE User SET etat=1 date_archiv=$date_arc WHERE id='$id'");
+$req->execute();
 }
+if ($req) {
+    header('location: ../admin/admin.php');
+   
+} */
 ?>

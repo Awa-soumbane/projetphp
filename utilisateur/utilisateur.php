@@ -2,8 +2,8 @@
 session_start();
 require_once '../dbase/dbase.php';
 $articles;
-
 $articles=$conn->query('SELECT nom FROM User ORDER BY id DESC');
+
 $sql= $conn->prepare("SELECT * FROM User WHERE email=?");
 $sql->execute(array($_SESSION['email']));
 $user = $sql->fetch();
@@ -74,6 +74,7 @@ $user = $sql->fetch();
     $q= $_GET['q'];
 $result=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DESC');
   }
+                  /*  /listes/ */
                 while($data = $result->fetch()){
                     $id = $data["id"];
                     $nom = $data["nom"];
@@ -83,14 +84,17 @@ $result=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id D
                     $matricules = $data["matricule"];
                     $date = $data["date_ins"];
                    /*  if($etat==0){ */
-                    echo "<tr><td>$nom</td><td>$prenom</td><td>$email</td><td>$roles</td><td>$matricules</td><td>$date</td>";
+                    echo "<tr>
+                    <td>$nom</td>
+                    <td>$prenom</td>
+                    <td>$email</td>
+                    <td>$roles</td>
+                    <td>$matricules</td>
+                    <td>$date</td>";
                     echo "<td style='display:flex; gap: 20px; justify-content:center;'>";
-                 /*    echo "<a href='../vus/swite.php?switeid=$id'><i class='fa-solid fa-repeat'></i></a>";
-                    echo "<a href='../vus/modification.php?modif=$id'><i class='fa-solid fa-pen-to-square'></i></a>";
-                    echo "<a href='admin.php?archive=$id'><i class='fa-solid fa-box-archive'></i></a>"; */
-                    
-                    echo "</td";
-                    echo "</tr>";
+                 
+                     
+                   "</tr>";
                     }
               /*   } */
                 //code pour archiver en changeant la valeur 0 par 1 avec 1=archiver et 0=dearchiver
@@ -132,26 +136,24 @@ $result=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id D
   color: #404040;
   display: block;
   justify-content: center;
+  margin: 5px 90px; 
 }
 th{
   font-size:  30px;
   border-bottom: 3px solid #ffcb61;
-  padding: 5px 20px;
-  font-weight: 500;
+  padding: 5px 10px;
+
   border: 2px solid;
-   padding: 5px 60px;
-  margin: 5px 90px; 
+
 
 }
 td{
-  
+  margin: 0px; 
  /*  font-weight: 400; */
-  padding: 2px 0px;
+  padding: 2px 10px;
   font-size: 20px;
   border: 2px solid;
-  height: 40px;
-  
-  
+  height: 40px; 
 }
   img
 {

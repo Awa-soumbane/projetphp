@@ -43,7 +43,7 @@ $user = $sql->fetch();
        <div class="end my-5">
        
         <!-- <button id="bout"><a href="../utilisateur/utilisateur.php">Utilisateur</a></button> -->
-       <button type="button" class="btn btn-light m-3"><a href="dearchi1.php">Liste Archivage </a></button>
+       <button type="button" class="btn btn-light m-3"> <a href="admin.php">Liste Actif </a> </button>
        <button type="button" class="btn btn-light">
        <a href="../vus/deconnection.php"><i class="fa-solid fa-right-to-bracket" ></i></a>
        </button> 
@@ -63,8 +63,8 @@ $user = $sql->fetch();
 
         <div class="container-fluid col-4" >
           <form class="d-flex" role="search" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" name="q">
-            <button class="btn btn-outline-success"id="rech" name="valider" type="submit">Recherche</button>
+            <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" name="q" id="inpu">
+            <button class="btn btn-outline-success" id="rech" name="valider" type="submit">Recherche</button>
           </form>
         </div>
 
@@ -88,19 +88,19 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
   $currentPage=1;
 }
 
-$list = $conn->prepare("SELECT COUNT(*) AS nb_user FROM User WHERE etat=0");
+$list = $conn->prepare("SELECT COUNT(*) AS nb_user FROM User WHERE etat=1");
 $list->execute();
 
 $result = $list->fetch();
 $nbUser = (int) $result['nb_user'];
 
-$parPage =11;
+$parPage =10;
 $pages = ceil($nbUser / $parPage);
 
 $premier = ($currentPage * $parPage) - $parPage;
 
 
-$list=$conn->prepare("SELECT * FROM User WHERE etat=0 ORDER BY id DESC LIMIT $premier, $parPage;");
+$list=$conn->prepare("SELECT * FROM User WHERE etat=1 ORDER BY id DESC LIMIT $premier, $parPage;");
 $list->execute();
 
             /* liste des eleves inscrit */
@@ -123,7 +123,7 @@ $list=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DES
 
                     $matSession = $_SESSION['matricule'];
                   /*   /supprimer le nom de l'utilisateur qui se connect/ */
-                    if($etat==0 && $matricules!=$matSession){
+                    if($etat==1 && $matricules!=$matSession){
                     echo '<tr>
                     <td>'.$nom.'</td>
                     <td>'.$prenom.'</td>
@@ -131,24 +131,21 @@ $list=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DES
                     <td>'.$roles.'</td>
                     <td>'.$matricules.'</td>
                     <td style="display:flex; gap: 20px; justify-content:center;"">
-                    <button><a title="changer le role" href="../vus/swite.php?switeid='.$id.'"><i class="fa-solid fa-repeat"></i></a></button>
-                    <button><a title="modifier"href="../vus/modification.php?modif='.$id.'"><i class="fa-solid fa-pen-to-square"></i></a></button>
-                    <button><a title="archiver"href="../admin/admin.php?archive='.$id.'" onclick="return confirm(\'Voulez vous vraimenr archiver ?\')"><i class="fa-solid fa-box-archive"></i></a></button>
+              
+<button> <a title="archiver"href="../admin/dearchi1.php?dearchive='.$id.'" onclick="return confirm(\'Voulez vous vraimenr desarchiver ?\')"><i class="fa-solid fa-calendar-xmark" id="dearch"></i></a></button> 
                     
                     </td>
                     </tr>';
                     }
                 }
                 //code pour archiver en changeant la valeur 0 par 1 avec 1=archiver et 0=dearchiver
-         if (isset($_GET['archive'])) {
-              $id=$_GET['archive'];
+         if (isset($_GET['dearchive'])) {
+              $id=$_GET['dearchive'];
              /*  $elev= SELECT * FORM User */
-  $req=$conn->query("UPDATE User SET etat='1' WHERE id='$id'");
-
+  $req=$conn->query("UPDATE User SET etat='0' WHERE id='$id'");
 
 }
-
-
+;
 
                 ?>
             </tbody>
@@ -215,7 +212,11 @@ $list=$conn->query('SELECT * FROM User where nom LIKE "%'.$q.'%" ORDER BY id DES
     font-size: 20px;
   
   }
- 
+  #rech{
+    background-color:  blue;
+    font-size: 20px;
+  
+  }
  
   </style>
     

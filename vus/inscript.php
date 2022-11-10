@@ -6,15 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<link rel="stylesheet" href=".css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/brands.min.js">
 </head>
 <body>
   <div>
     <img src="images/eva1.jpg" alt="" style=" width: 100%; height: 250px;object-fit: cover;">
 </div>
   <div class="container w-50 p-3 col-md-5 mb-8">
+  <?php
+   /*   if(isset($_GET["erreur_compte"])){
+        $erreur=$_GET["erreur_compte"];
+      
+        echo "<p style='color:red'>".$erreur."</p>";
+     }
+     */
+     ?>
+
   <h1>FORMULAIRE D'INSCRIPTION</h1>
     <form id="form" action="../traitement/traitement.php" method="POST" class="row g-3 d-flex justify-content-center no-wrap m-2 bg-light" enctype="multipart/form-data">
        
@@ -35,8 +44,8 @@
       <div class="col-md-6">
         <div class="input-control">
             <label for="email">Email</label>
-            <input id="email" name="email" class=" p-3 rounded-0" type="email">
-            <p><?=$_GET["messages"]?? null?></p>
+            <input id="email" name="email" class=" p-3 rounded-0" type="text">
+            <p style="color:red;"><?=$_GET["messages"]?? null?></p>
             <p class="error"></p>
             </div>
         </div>
@@ -99,6 +108,7 @@
   font-size: 12px; */
   display: flex;
   justify-content: center; 
+  border-radius: 10px;
 }
 #email{
     height: 50px;
